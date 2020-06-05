@@ -122,6 +122,7 @@ export class Application implements EventListenerObject{
 
         this.update(elapsedMsec, intervalSec)
         this.render()
+        this._handlerTimers(intervalSec)
 
         this._requestId = requestAnimationFrame((elapsedMesc:number):void => {
             this.step(elapsedMesc)
@@ -256,17 +257,15 @@ export class Application implements EventListenerObject{
                 return timer.id
             }
         }
-        
-        if (!found) {
-            timer = new Timer(callback)
-            timer.id = ++this._timeId
-            timer.onlyOnce = onlyOnce
-            timer.enabled = true
-            timer.timeout = timeout
-            timer.countdown = timeout
-            this.timers.push(timer)
-            return timer.id
-        }
+        timer = new Timer(callback)
+        timer.id = ++this._timeId
+        timer.onlyOnce = onlyOnce
+        timer.enabled = true
+        timer.callbackData = data
+        timer.timeout = timeout
+        timer.countdown = timeout
+        this.timers.push(timer)
+        return timer.id
     }
     private _handlerTimers (intervalSec: number) {
         for (let i = 0; i < this.timers.length; i++) {
@@ -277,11 +276,11 @@ export class Application implements EventListenerObject{
             timer.countdown = timer.countdown - intervalSec
             if (timer.countdown < 0.0) {
                 timer.callback(timer.id, timer.callbackData)
-            }
-            if (timer.onlyOnce === false) {
-                timer.countdown = timer.timeout
-            } else {
-                this.removeTimer(timer.id)
+                if (timer.onlyOnce === false) {
+                    timer.countdown = timer.timeout
+                }  else {
+                    this.removeTimer(timer.id)
+                }
             }
         }
     }

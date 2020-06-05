@@ -20,6 +20,10 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
                 exclude: /node_module/ 
+            },
+            {
+                test: /\.(png|jpg|svg|gif)$/, 
+                loader: 'file-loader'
             }
         ]
     },

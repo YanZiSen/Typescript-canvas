@@ -21,10 +21,10 @@ export class ApplicationTest extends Application {
         `)
     }
     public update (elapseMesc:number, intervalSec: number): void {
-        console.log('elapseMesc', elapseMesc, 'intervalSec', intervalSec)
+        // console.log('elapseMesc', elapseMesc, 'intervalSec', intervalSec)
     }
 
     public render () {
-        console.log('render')
+        // console.log('render')
     }
 }
