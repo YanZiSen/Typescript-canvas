@@ -1,0 +1,1 @@
+### fsReader 重置为null,不能重置的问题， strictNullChecks改为false解决

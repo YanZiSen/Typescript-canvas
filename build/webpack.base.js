@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: {
         'render-text': path.join(__dirname, '../src/render-text/main.ts'),
+        'image-compress': path.join(__dirname, '../src/image-compress/index.ts'), 
         'animation': path.join(__dirname, '../src/animation/index.ts'),
         'application': path.join(__dirname, '../src/application/index.ts'),
     },
@@ -44,6 +45,12 @@ module.exports = {
             template: path.join(__dirname, '../src/application/index.html'),
             filename: 'application.html',
             chunks: ['application'],
+            inject: true
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, '../src/image-compress/index.html'),
+            filename: 'image-compress.html',
+            chunks: ['image-compress'],
             inject: true
         })
     ]
