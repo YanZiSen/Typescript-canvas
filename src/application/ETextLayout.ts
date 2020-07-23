@@ -1,4 +1,4 @@
-export enum ETextLayout {
+export enum ELayout {
     LEFT_TOP,
     RIGHT_TOP,
     RIGHT_BOTTOM,

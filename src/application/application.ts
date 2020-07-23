@@ -132,6 +132,7 @@ export class Application implements EventListenerObject{
     public update (elapsedMesc: number, intervalSec: number):void {}
     public render ():void {}
 
+    // 将视图坐标转为canvas坐标
     private _viewportToCanvasCoordinate (evt: MouseEvent) :vec2 {
         if (this.canvas) {
             let rect:ClientRect = this.canvas.getBoundingClientRect();

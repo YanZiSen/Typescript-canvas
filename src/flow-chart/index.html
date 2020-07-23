@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flow-chart</title>
+    <style>
+        html, body {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .work-flow-app {
+            height: 100%;
+            overflow: hidden;
+        }
+        .work-flow-slide {
+            height: 100%;
+            float: left;
+            width: 240px;
+            border-right: 1px solid #000;
+        }
+        .work-flow-main {
+            float: right;
+            height: 100%;
+            width: calc(100% - 240px);
+        }
+    </style>
+</head>
+<body>
+    <div class="work-flow-app">
+        <div class="work-flow-slide" id="iconC">
+            <span draggable="true" class="drag-item" data-type="rect">信息表单</span>
+            <span draggable="true" class="drag-item" data-type="round-rect">评分表单</span>
+            <span draggable="true" class="drag-item" data-type="ploygon">决策框</span> <br/>
+            <span draggable="true" class="drag-item" data-type="calc-rect">计算框</span>
+            <span draggable="true" class="drag-item" data-type="tip">提示框</span>
+            <span draggable="true" class="drag-item" data-type="timer">定时器</span><br/>
+            <span draggable="true" class="drag-item" data-type="child-pro">子流程</span>
+            <span draggable="true" class="drag-item" data-type="trigger">触发器</span>
+            <span draggable="true" class="drag-item" data-type="end-mod">结束框</span> <br/>
+            <span draggable="true" class="drag-item" data-type="dialog">机器人对话框</span>
+            <button id="addWidth">扩大画布</button>
+        </div>
+        <div class="work-flow-main" id="containerC"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas-t</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="800" style="border: 1px solid #ddd">
+
+    </canvas>
+    <script>
+        let canvasEl = document.getElementById('canvas')
+        let context = canvasEl.getContext('2d')
+        context.beginPath()
+        context.arc(20,20, 20, 0 , Math.PI * 2)
+        context.fill()
+        context.beginPath()
+        context.arc(100, 100, 20, 0, Math.PI * 2)
+        context.fill()
+        // context.rect(50, 50, 250, 50)
+        // context.rect(250, 250, 250, 50)
+        // context.fill()
+    </script>
+</body>
+</html>

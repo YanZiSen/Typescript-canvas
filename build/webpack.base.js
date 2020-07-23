@@ -7,10 +7,14 @@ module.exports = {
         'image-compress': path.join(__dirname, '../src/image-compress/index.ts'), 
         'animation': path.join(__dirname, '../src/animation/index.ts'),
         'application': path.join(__dirname, '../src/application/index.ts'),
+        'canvas-t': path.join(__dirname, '../src/canvas-t/index.ts'),
+        'flow-chart': path.join(__dirname, '../src/flow-chart/test.ts'),
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, '../dist')
+        path: path.join(__dirname, '../dist'),
+        library: 'chart',
+        libraryTarget: 'umd'
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx']
@@ -52,6 +56,19 @@ module.exports = {
             filename: 'image-compress.html',
             chunks: ['image-compress'],
             inject: true
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, '../src/canvas-t/index.html'),
+            filename: 'canvas-t.html',
+            chunks: ['canvas-t'],
+            inject: true
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, '../src/flow-chart/index.html'),
+            filename: 'flow-chart.html',
+            chunks: ['flow-chart'],
+            inject: true
         })
+        // 
     ]
 }
