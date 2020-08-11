@@ -95,7 +95,7 @@ export interface IDrawable {
 export interface IShape extends IHittable , IDrawable {
     readonly type : ShapeType ; 
     data : any ; 
-    readonly id: string;
+    id: string;
 }
 
 export interface ISpriteContainer {
@@ -114,6 +114,7 @@ export interface ISpriteContainer {
     unActiveSprEvent: UnActiveSprEventHandler | null;
     onLinkedEvent: LinkedEventHandler | null;
     onConcelActiveEvent: ConcelActiveEventHandler | null;
+    onDeleteEvent: DeleteHandler | null;
     readonly sprite : ISprite | undefined ;
 }
 
@@ -132,6 +133,7 @@ export type ActiveSprEventHandler = (spr: ISprite) => void;
 export type UnActiveSprEventHandler = (spr: ISprite) => void;
 export type LinkedEventHandler = (spr: ISprite) => void;
 export type ConcelActiveEventHandler = (spr: ISprite) => void;
+export type DeleteHandler = (spr: ISprite) => void;
 
 export interface ISprite extends ITransformable , IRenderState {
     name : string ;  

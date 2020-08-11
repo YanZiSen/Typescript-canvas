@@ -22,7 +22,7 @@ export abstract class  BaseShape2D implements IShape {
     public axisLength : number ;
     public data : any ;
     public active: false;
-    readonly id : string;
+    public id : string;
     abstract get width () : number;
     abstract get height () : number;
 
@@ -1039,6 +1039,51 @@ export class Line implements IShape {
     public hitFeaturePoint () : FeaturePt|null {
         return null
     }
+    public drawText (context : CanvasRenderingContext2D, state: IRenderState) : void {
+        let reduceArr: [number, vec2, Array<vec2>] = this.drawPt.reduce((asum:[number, vec2, Array<vec2>],item:vec2, index:number) => {
+            let substract: vec2 = vec2.difference(asum[1], item, new vec2())
+            asum[0] += substract.length
+            asum[1] = item
+            asum[2].push(substract)
+            return asum
+        }, [0, this.drawPt[0], []])
+        let [total,,asumArr] = reduceArr
+        let totalLenHalf = total / 2
+
+        if (totalLenHalf < 20) { // 线段过短不绘制文字
+            return
+        }
+
+        let index:number = 0
+        asumArr.shift()
+
+        while (totalLenHalf > 0) {
+            totalLenHalf -= asumArr[index].length
+            index++
+        }
+
+        let curPt: vec2 = this.drawPt[index]
+        
+        let dir: 'x'|'y' = 'x', otherDir:'x'|'y' = 'y'
+        if (this.drawPt[index].x === this.drawPt[index - 1].x) {
+            dir = 'y'
+            otherDir = 'x'
+        }
+        if (this.drawPt[index][dir] >= this.drawPt[index - 1][dir]) {
+            totalLenHalf = -totalLenHalf
+            console.log('dir', dir, 'otherdir', otherDir)
+            console.log('changed', totalLenHalf)
+        }
+        let dis = dir === 'x' ? new vec2(totalLenHalf, 0): new vec2(0, totalLenHalf)
+
+        let drawPt:vec2 = vec2.difference(curPt, dis, new vec2())
+        context.save()
+        context.font = state.font
+        context.textAlign = state.textAlign
+        context.textBaseline = state.textBaseLine
+        context.fillText(state.text, drawPt.x, drawPt.y)
+        context.restore()
+    }
 
     public beginDraw ( transformable : ITransformable , state : IRenderState , context : CanvasRenderingContext2D ): void {
         context . save ( ) ;
@@ -1059,6 +1104,7 @@ export class Line implements IShape {
                 context . lineTo ( point . x , point. y ) ;
             }
         })
+        this.drawText(context, state)
         let v: vec2 = vec2.difference(points[points.length - 2], points[points.length - 1])
         v.normalize()
         let rotate: mat2d = mat2d.makeRotationFromVectors(vec2.xAxis, v)
@@ -1080,6 +1126,9 @@ export class Line implements IShape {
    
     }
 
+    getA () : vec2 [] {
+        return this.drawPt
+    }
     public get type () : ShapeType {
         return ShapeType.LINE;
     }

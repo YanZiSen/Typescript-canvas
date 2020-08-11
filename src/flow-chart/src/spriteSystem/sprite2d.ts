@@ -7,7 +7,7 @@ export class Sprite2D implements ISprite {
     public isVisible : boolean = true ;
     public active: boolean = false;
     public fillStyle : string | CanvasGradient | CanvasPattern = 'white';
-    public text : string = '文字测试';
+    public text : string = '';
     public font: FontType =  '15px sans-serif';
     public textBaseLine: TextBaseLine = 'middle';
     public textAlign: TextAlign = 'center';

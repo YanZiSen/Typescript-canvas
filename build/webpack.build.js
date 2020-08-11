@@ -2,6 +2,7 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const baseConfig = require('./webpack.base')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -30,6 +31,16 @@ module.exports = /**merge(baseConfig,*/ {
                 loader: 'file-loader'
             }
         ]
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            terserOptions: {
+                compress: {
+                    drop_console: true
+                }
+            }
+        })],
     },
     plugins: [
         new CleanWebpackPlugin(),

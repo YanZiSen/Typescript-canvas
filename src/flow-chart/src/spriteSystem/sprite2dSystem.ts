@@ -1,5 +1,5 @@
 import { CanvasMouseEvent, CanvasKeyBoardEvent, EInputEventType } from "../application";
-import {ISpriteContainer,IDispatcher,ISprite,EOrder, IShape, FeaturePt, SpriteFactory, PtPos, AddLinkEventHandler, ActiveSprEventHandler, UnActiveSprEventHandler, ShapeType, LinkedEventHandler, ConcelActiveEventHandler} from "./interface";
+import {ISpriteContainer,IDispatcher,ISprite,EOrder, IShape, FeaturePt, SpriteFactory, PtPos, AddLinkEventHandler, ActiveSprEventHandler, UnActiveSprEventHandler, ShapeType, LinkedEventHandler, ConcelActiveEventHandler, DeleteHandler} from "./interface";
 import {mat2d,Math2D , vec2 } from "../math2d"
 import { Sprite2D } from "./sprite2d";
 import {Line, BaseShape2D} from './shapes'
@@ -11,6 +11,7 @@ export class Sprite2DManager implements ISpriteContainer , IDispatcher  {
     public activeSprEvent: ActiveSprEventHandler | null = null;
     public unActiveSprEvent: UnActiveSprEventHandler | null = null;
     public onLinkedEvent: LinkedEventHandler | null = null;
+    public onDeleteEvent: DeleteHandler | null = null;
     public onConcelActiveEvent: ConcelActiveEventHandler | null = null;
 
     public addSprite ( sprite : ISprite  ) : ISpriteContainer {
@@ -158,6 +159,7 @@ export class Sprite2DManager implements ISpriteContainer , IDispatcher  {
         for ( let i = 0 ; i < this . _sprites . length ; i++ ) {
             spr = this . _sprites [ i ] ;
             if (evt.keyCode === 8 && spr.active) {
+                this.onDeleteEvent && this.onDeleteEvent(spr)
                 this.removeSpriteAt(i)
                 break;
             }
@@ -220,7 +222,6 @@ export class Sprite2DManager implements ISpriteContainer , IDispatcher  {
                     // let shape = this._scaleSprite.shape as any
                     // this._scaleSprite.scaleX = Math.abs(x) / shape.width * 0.5
                     // this._scaleSprite.scaleY = Math.abs(y) / shape.height * 0.5
-
                 let mat : mat2d | null = this . _scaleSprite . getLocalMatrix ( ) ;
                 // 获取相对于图形的局部坐标 将逆矩阵乘以向量
                 Math2D . transform ( mat , evt . canvasPosition , evt . localPosition ) ;  
@@ -290,6 +291,7 @@ export class Sprite2DManager implements ISpriteContainer , IDispatcher  {
             }
 
             if (spr.hitHandlerTest(evt.localPosition)) {
+                console.log(spr)
                 this._scaleSprite = spr
                 return
                 // this._dragPos = evt.canvasPosition
