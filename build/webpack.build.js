@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = /**merge(baseConfig,*/ {
     entry: {
-        'flow-chart': path.join(__dirname, '../src/flow-chart/index.ts'),
+        'flow-chart': path.join(__dirname, '../src/flow-chart/test.ts'),
     },
     output: {
         filename: '[name].js',

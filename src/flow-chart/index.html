@@ -5,46 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flow-chart</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         html, body {
             height: 100%;
             padding: 0;
             margin: 0;
         }
-        * {
-            box-sizing: border-box;
-        }
         .work-flow-app {
             height: 100%;
-            overflow: hidden;
-        }
-        .work-flow-slide {
-            height: 100%;
-            float: left;
-            width: 240px;
-            border-right: 1px solid #000;
+            display: flex;
+            align-items: stretch;
         }
         .work-flow-main {
             float: right;
             height: 100%;
-            width: calc(100% - 240px);
+            flex:1;
+        }
+        .work-flow-slide{
+            flex: 0 0 240px;
+            height: 100%;
+            overflow: auto;
+            border-right: 1px solid #000;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .drag-item{
+            text-align: center;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            line-height: 40px;
+            width: 140px;
+            cursor: move;
+        }
+        button{
+            background:#fff;
+            outline:none;
+            width: 140px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="work-flow-app">
         <div class="work-flow-slide" id="iconC">
-            <span draggable="true" class="drag-item" data-type="rect">信息表单</span>
-            <span draggable="true" class="drag-item" data-type="round-rect">评分表单</span>
-            <span draggable="true" class="drag-item" data-type="ploygon">决策框</span> <br/>
-            <span draggable="true" class="drag-item" data-type="calc-rect">计算框</span>
-            <span draggable="true" class="drag-item" data-type="tip">提示框</span>
-            <span draggable="true" class="drag-item" data-type="timer">定时器</span><br/>
+            <span draggable="true" class="drag-item" data-type="rect">矩形1</span>
+            <span draggable="true" class="drag-item" data-type="timer">矩形2</span>
+            <span draggable="true" class="drag-item" data-type="trigger">矩形3</span>
+            <span draggable="true" class="drag-item" data-type="dialog">矩形4</span>
+
+            <span draggable="true" class="drag-item" data-type="round-rect">圆角矩形</span>
+            <span draggable="true" class="drag-item" data-type="calc-rect">菱形</span>
+            <span draggable="true" class="drag-item" data-type="tip">圆形</span>
             <span draggable="true" class="drag-item" data-type="child-pro">子流程</span>
-            <span draggable="true" class="drag-item" data-type="trigger">触发器</span>
-            <span draggable="true" class="drag-item" data-type="end-mod">结束框</span> <br/>
-            <span draggable="true" class="drag-item" data-type="dialog">机器人对话框</span>
-            <button id="addWidth">扩大画布</button>
+            <span draggable="true" class="drag-item" data-type="end-mod">梯形</span> 
+            <!-- <button id="addWidth">扩大画布</button> -->
             <button id="removeAll">清除所有</button>
+            <button id="getAll">获取数据</button>
         </div>
         <div class="work-flow-main" id="containerC"></div>
     </div>

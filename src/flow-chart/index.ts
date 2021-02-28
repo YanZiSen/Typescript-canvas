@@ -244,21 +244,21 @@ export class App implements EventListenerObject {
         if (type === ShapeType.RECT) { // 信息表单
             shape = SpriteFactory.createRect(90, 60, 0.5, 0.5)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '信息表单'
+            sprite.text = '矩形'
         } else if (type === ShapeType.ROUNDRECT) { // 评分表单
             shape = SpriteFactory.createRoundRect(60, 60, 0.5, 0.5, 10)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '评分表单'
+            sprite.text = '矩形2'
         } else if (type === ShapeType.RHOMB) { // 决策框
             let points = [new vec2(0, -42), new vec2(42, 0), new vec2(0, 42), new vec2(-42, 0)]
             shape = SpriteFactory.createRhomb(points)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '决策框'
+            sprite.text = '菱形'
         } else if (type === ShapeType.CALCRECT) { // 计算框
             shape = SpriteFactory.createCalcRect(60, 60, 0.5, 0.5)
             sprite = SpriteFactory.createSprite(shape)
             sprite.renderType = ERenderType.CUSTOM
-            sprite.text = '计算框'
+            sprite.text = '矩形4'
         }  else if (type === ShapeType.CHILDRECT) { // 子流程
             shape = SpriteFactory.createChildRect(96, 60, 0.5, 0.5)
             sprite= SpriteFactory.createSprite(shape)
@@ -270,19 +270,19 @@ export class App implements EventListenerObject {
             ]
             shape = SpriteFactory.createLadder(points)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '触发器'
+            sprite.text = '梯形'
         } else if (type === ShapeType.FULLROUNDRECT) { // 结束框
             shape = SpriteFactory.createFullRoundRect(146, 60, 0.5, 0.5)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '结束框'
+            sprite.text = '圆角矩形'
         } else if (type === ShapeType.DIALOGRECT) { // 对话框
             shape = SpriteFactory.createDialogRect(125, 60, 0.5, 0.5, 16)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '对话框'
+            sprite.text = '矩形3'
         } else if (type === ShapeType.CIRCLE) {
             shape = SpriteFactory.createCircle(50)
             sprite = SpriteFactory.createSprite(shape)
-            sprite.text = '定时器'
+            sprite.text = '圆形'
         }
         sprite.renderType = ERenderType.STROKE_FILL
         sprite.x = localPt.values[0]

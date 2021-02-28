@@ -3,23 +3,37 @@ import {App} from './index'
 let canvasC:HTMLElement = document.getElementById('containerC')
 let dragList:NodeList = document.querySelectorAll('.drag-item')
 let rect: DOMRect = canvasC.getBoundingClientRect()
-console.log('rect', rect)
+
 let canvas:HTMLCanvasElement = document.createElement('canvas')
 canvas.setAttribute('width', rect.width + '')
 canvas.setAttribute('height', rect.height + '')
 canvasC.appendChild(canvas)
 
 Array.from(dragList).forEach((item, idx) => {
-    item.addEventListener('dragstart', (e) => {
+    item.addEventListener('dragstart', (e) => { // 此处事件绑定仅用于测试
         let evt = e as DragEvent
         let target = e.target as HTMLElement
         evt.dataTransfer.setData('text/plain', JSON.stringify({type: idx + 1}))
     }, false)
 })
 
-document.getElementById('removeAll').addEventListener('click', () => app.removeAll())
+let app = new App(canvas, {
+    onDelete (sprite) {
+        console.log('sprite is delete', sprite);
+    },
+    onActive: (spr) => console.log,
+    onCancelActive: (spr) => console.log,
+    onAddShape: () => console.log,
+    onLinked: (spr) => console.log,
+    stretchX: (x: number) => console.log,
+    stretchY: (y: number) => console.log,
+})
 
-let app = new App(canvas)
+document.getElementById('removeAll').addEventListener('click', () => app.removeAll());
+document.getElementById('getAll').addEventListener('click', () => {
+    console.log(app.getSprites());
+});
+
 
 canvasC.addEventListener('dragenter', e => e.preventDefault())
 canvasC.addEventListener('dragover', e => e.preventDefault())
@@ -31,7 +45,7 @@ canvasC.addEventListener('drop', (e) => {
 
 let sprites = [
     {
-        "text":"信息表单",
+        "text":"矩形1",
         "transform":{
             "position":{
                 "values":{
@@ -60,7 +74,7 @@ let sprites = [
         "type":1
     },
     {
-        "text":"评分表单",
+        "text":"矩形2",
         "transform":{
             "position":{
                 "values":{
@@ -93,7 +107,7 @@ let sprites = [
         "radius":10
     },
     {
-        "text":"结束框",
+        "text":"矩形3",
         "transform":{
             "position":{
                 "values":{

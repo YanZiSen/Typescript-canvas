@@ -158,7 +158,7 @@ export class Sprite2DManager implements ISpriteContainer , IDispatcher  {
         let spr: ISprite ;
         for ( let i = 0 ; i < this . _sprites . length ; i++ ) {
             spr = this . _sprites [ i ] ;
-            if (evt.keyCode === 8 && spr.active) {
+            if ((evt.keyCode === 8 || evt.keyCode === 46)&& spr.active) {
                 this.onDeleteEvent && this.onDeleteEvent(spr)
                 this.removeSpriteAt(i)
                 break;

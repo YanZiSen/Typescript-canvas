@@ -1071,8 +1071,6 @@ export class Line implements IShape {
         }
         if (this.drawPt[index][dir] >= this.drawPt[index - 1][dir]) {
             totalLenHalf = -totalLenHalf
-            console.log('dir', dir, 'otherdir', otherDir)
-            console.log('changed', totalLenHalf)
         }
         let dis = dir === 'x' ? new vec2(totalLenHalf, 0): new vec2(0, totalLenHalf)
 

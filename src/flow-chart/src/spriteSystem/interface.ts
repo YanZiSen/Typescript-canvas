@@ -19,20 +19,16 @@ export enum PtPos {
 export enum ShapeType{
     RECT = 1,
     ROUNDRECT,
+    DIALOGRECT,
+    CALCRECT,
     FULLROUNDRECT,
-
     RHOMB,
     CIRCLE,
     CHILDRECT,
-
-    CALCRECT,
-    REDUCE, // 医学处理
     LADDER,
-    DIALOGRECT,
-
-    ELLIPSE,
     CONVEXPOLYGON,
-    
+    ELLIPSE,
+    REDUCE, // 医学处理
     LINE,
     BEZIERPATH,
     GRID,
